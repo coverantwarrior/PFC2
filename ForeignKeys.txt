@@ -1,0 +1,72 @@
+//Foreign Keys taula llibres
+
+ALTER TABLE `ia_biblioteca`.`bi01_llibres` 
+ADD INDEX `bi01autor_idx` (`bi01_codiautor` ASC)  COMMENT '',
+ADD INDEX `bi01editorial_idx` (`bi01_codieditorial` ASC)  COMMENT '',
+ADD INDEX `bi01genere_idx` (`bi01_codigenere` ASC)  COMMENT '',
+ADD INDEX `bi01tema_idx` (`bi01_coditema` ASC)  COMMENT '',
+ADD INDEX `bi01idioma_idx` (`bi01_idioma` ASC)  COMMENT '';
+ALTER TABLE `ia_biblioteca`.`bi01_llibres` 
+ADD CONSTRAINT `bi01autor`
+  FOREIGN KEY (`bi01_codiautor`)
+  REFERENCES `ia_biblioteca`.`bi04_autors` (`bi04_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `bi01editorial`
+  FOREIGN KEY (`bi01_codieditorial`)
+  REFERENCES `ia_biblioteca`.`bi05_editorials` (`bi05_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `bi01genere`
+  FOREIGN KEY (`bi01_codigenere`)
+  REFERENCES `ia_biblioteca`.`bi06_generes` (`bi06_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `bi01tema`
+  FOREIGN KEY (`bi01_coditema`)
+  REFERENCES `ia_biblioteca`.`bi07_temes` (`bi07_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `bi01idioma`
+  FOREIGN KEY (`bi01_idioma`)
+  REFERENCES `ia_biblioteca`.`bi08_idiomes` (`bi08_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+//Foreign Keys taula Prestecs
+
+ALTER TABLE `ia_biblioteca`.`bi02_prestecs` 
+ADD INDEX `bi02llibres_idx` (`bi02_codi_llibre` ASC)  COMMENT '',
+ADD INDEX `bi02persona_idx` (`bi02_codi_persona` ASC)  COMMENT '';
+ALTER TABLE `ia_biblioteca`.`bi02_prestecs` 
+ADD CONSTRAINT `bi02llibres`
+  FOREIGN KEY (`bi02_codi_llibre`)
+  REFERENCES `ia_biblioteca`.`bi01_llibres` (`bi01_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `bi02persona`
+  FOREIGN KEY (`bi02_codi_persona`)
+  REFERENCES `ia_biblioteca`.`bi03_persones` (`bi03_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+//Foreign Keys taula llibre_autor
+
+ALTER TABLE `ia_biblioteca`.`bi09_llibre_autor` 
+DROP FOREIGN KEY `bi09_llibre`,
+DROP FOREIGN KEY `bi09_autor`;
+ALTER TABLE `ia_biblioteca`.`bi09_llibre_autor` 
+ADD INDEX `bi09autor_idx` (`bi09_id_autor` ASC)  COMMENT '',
+DROP INDEX `bi09_autor_idx` ;
+ALTER TABLE `ia_biblioteca`.`bi09_llibre_autor` 
+ADD CONSTRAINT `bi09llibre`
+  FOREIGN KEY (`bi09_id_llibre`)
+  REFERENCES `ia_biblioteca`.`bi01_llibres` (`bi01_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `bi09autor`
+  FOREIGN KEY (`bi09_id_autor`)
+  REFERENCES `ia_biblioteca`.`bi04_autors` (`bi04_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;

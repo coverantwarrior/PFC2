@@ -1,0 +1,8 @@
+create table bi01_llibres(bi01_id integer(11) primary key auto_increment not null, bi01_titol varchar(200), bi01_codiautor integer(11), bi01_codieditorial integer(11), bi01_ISBN varchar(13),bi01_any_publicacio year,bi01_codigenere integer(11), bi01_coditema integer(11),bi01_observacions varchar(254),bi01_num_pagines integer(11),bi01_data_alta date, bi01_estat varchar(1),bi01_idioma integer(11), bi01_edicio varchar(25),bi01_topografic varchar(6));
+create table bi02_prestecs(bi02_num_transac integer(11) not null primary key auto_increment,bi02_codi_llibre integer(11),bi02_codi_persona integer(11),bi02_data_prestec date,bi02_data_venciment date, bi02_data_lliurament date);
+create table bi03_persones(bi03_id integer(11) primary key auto_increment not null, bi03_nom varchar(25), bi03_cognom1 varchar(25), bi03_cognom2 varchar(25), bi03_dni varchar(15), bi03_adreca varchar(40), bi03_poblacio varchar(25),bi03_provincia varchar(25),bi03_codi_postal varchar(5));
+create table bi04_autors(bi04_id integer(11) primary key auto_increment not null,bi04_nom varchar(150),bi04_cognoms varchar(150));
+create table bi05_editorials(bi05_id integer(11) primary key not null auto_increment,bi05_nom varchar(200));
+create table bi06_generes(bi06_id integer(11) not null auto_increment primary key,bi06_nom varchar(45));
+create table bi07_temes(bi07_id integer(11) not null auto_increment primary key, bi07_nom varchar(45));
+create table bi08_idiomes(bi08_id integer(11) not null auto_increment primary key, bi08_nom varchar(45));
